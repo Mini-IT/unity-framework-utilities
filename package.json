@@ -1,0 +1,17 @@
+{
+	"name": "com.miniit.framework.utilities",
+	"version": "1.0.0",
+	"dependencies": {
+	},
+	"unity": "2020.3",
+	"author": {
+		"name": "Mini IT",
+		"url": "http://snipeserver.com"
+	},
+	"keywords": [
+		"MiniIT",
+		"Utilities"
+	],
+	"displayName": "Mini IT Framework - Utilities",
+	"description": "Mini IT Framework - Utilities"
+}
