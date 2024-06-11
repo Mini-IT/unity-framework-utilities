@@ -21,6 +21,28 @@ namespace MiniIT.Utils
 			_random = new Random(seed);
 		}
 
+		public int GetWeightedRandomIndex(IList<int> weights)
+		{
+			int sum_weight = 0;
+			for (int i = 0; i < weights.Count; i++)
+			{
+				sum_weight += weights[i];
+			}
+			int value = Range(0, sum_weight) + 1;
+			int sum = 0;
+			for (int i = 0; i < weights.Count; i++)
+			{
+				sum += weights[i];
+				if (value <= sum)
+				{
+					return i;
+				}
+			}
+
+			// should not get here
+			return -1;
+		}
+
 		public T GetWeightedRandom<T>(Dictionary<T, int> weights)
 		{
 			int sum_weight = 0;
