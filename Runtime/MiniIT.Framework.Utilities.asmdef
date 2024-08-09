@@ -1,7 +1,9 @@
 {
     "name": "MiniIT.Framework.Utilities",
     "rootNamespace": "MiniIT",
-    "references": [],
+    "references": [
+        "UniTask"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -9,6 +11,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "2.3.0",
+            "define": "UNITASK"
+        }
+    ],
     "noEngineReferences": false
 }
