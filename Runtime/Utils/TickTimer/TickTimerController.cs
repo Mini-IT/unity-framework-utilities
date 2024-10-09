@@ -53,7 +53,7 @@ namespace MiniIT.Utils
 
 			_loopSystem = new PlayerLoopSystem()
 			{
-				updateDelegate = OnPlayerLoopUpdate,
+				updateDelegate = OnPlayerLoopSystemUpdate,
 				type = typeof(TickTimer)
 			};
 
@@ -81,7 +81,7 @@ namespace MiniIT.Utils
 			_loopSystem = default;
 		}
 
-		private void OnPlayerLoopUpdate()
+		private void OnPlayerLoopSystemUpdate()
 		{
 			DateTime now = DateTime.UtcNow;
 
