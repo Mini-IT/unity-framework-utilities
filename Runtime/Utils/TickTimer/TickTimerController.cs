@@ -83,7 +83,7 @@ namespace MiniIT.Utils
 
 		private void OnPlayerLoopSystemUpdate()
 		{
-			DateTime now = DateTime.UtcNow;
+			long nowTicks = Stopwatch.GetTimestamp();
 
 			for (int i = 0; _timers != null && i < _timers.Count; i++)
 			{
@@ -95,7 +95,7 @@ namespace MiniIT.Utils
 					continue;
 				}
 
-				if (timer.IsRunning && timer.GetTimeFromLastTick(now) >= timer.Interval)
+				if (timer.IsRunning && timer.GetTimeFromLastTick(nowTicks) >= timer.Interval)
 				{
 					timer.InvokeTick(now);
 				}

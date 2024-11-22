@@ -45,9 +45,9 @@ namespace MiniIT.Utils
 			_lastTickTime = now;
 		}
 
-		internal TimeSpan GetTimeFromLastTick(DateTime now)
+		internal TimeSpan GetTimeFromLastTick(long nowTicks)
 		{
-			return now.Subtract(_lastTickTime);
+			return Stopwatch.GetElapsedTime(_lastTickTime, nowTicks);
 		}
 	}
 }
