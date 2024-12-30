@@ -6,7 +6,7 @@ namespace MiniIT.Unity
 {
 	public class FrameRateDrivenStopwatch : IDisposable
 	{
-		public TimeSpan Elapsed { get; private set; }
+		public TimeSpan Elapsed { get; set; }
 		public bool IsRunning { get; set; }
 
 		private PlayerLoopSystem _loopSystem;
@@ -29,7 +29,7 @@ namespace MiniIT.Unity
 			Start();
 		}
 
-		public void Start()
+		public virtual void Start()
 		{
 			IsRunning = true;
 		}
@@ -47,7 +47,7 @@ namespace MiniIT.Unity
 			}
 		}
 
-		private void InitLoopSystem()
+		protected void InitLoopSystem()
 		{
 			_loopSystem = new PlayerLoopSystem()
 			{
@@ -64,7 +64,7 @@ namespace MiniIT.Unity
 			_loopSystem = default;
 		}
 
-		private void OnLoopSystemUpdate()
+		public virtual void OnLoopSystemUpdate()
 		{
 			if (!IsRunning)
 			{
