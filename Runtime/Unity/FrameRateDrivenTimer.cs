@@ -1,57 +1,59 @@
 using System;
-using UnityEngine;
 
 namespace MiniIT.Unity
 {
 	public class FrameRateDrivenTimer : FrameRateDrivenStopwatch
 	{
 		public bool AutoReset { get; set; }
-		private Action TimerCallback { get; set; }
+		public TimeSpan Interval{ get; set; }
 
-		public double Interval
-		{
-			get => _interval;
-			set => _interval = value > 0.0 ? value : throw new ArgumentException("Timer interval cannot be zero.");
-		}
-
-		private double _interval;
+		private readonly Action _timerCallback;
 
 		public FrameRateDrivenTimer(Action timerCallback)
+			: this(TimeSpan.FromSeconds(1), true, timerCallback)
 		{
-			TimerCallback = timerCallback;
-			IsRunning = false;
-			AutoReset = true;
-			_interval = 100.0;
 		}
 
-		public override void Start() // Start the timer always reset
+		public FrameRateDrivenTimer(TimeSpan interval, bool autoReset, Action timerCallback)
+			: base(false)
 		{
-			Elapsed = TimeSpan.Zero;
-			IsRunning = true;
+			Interval = interval;
+			AutoReset = autoReset;
+			_timerCallback = timerCallback;
 		}
 
-		public override void OnLoopSystemUpdate()
+		public override void Start()
 		{
-			base.OnLoopSystemUpdate();
+			if (!IsRunning)
+			{
+				Restart();
+			}
+		}
 
+		protected override void OnLoopSystemUpdate()
+		{
 			if (!IsRunning)
 			{
 				return;
 			}
 
-			if (Elapsed.TotalMilliseconds >= _interval)
-			{
-				if (AutoReset)
-				{
-					Restart();
-				}
-				else
-				{
-					Reset();
-				}
+			base.OnLoopSystemUpdate();
 
-				TimerCallback?.Invoke();
+			if (Elapsed < Interval)
+			{
+				return;
 			}
+
+			if (AutoReset)
+			{
+				Restart();
+			}
+			else
+			{
+				Reset();
+			}
+
+			_timerCallback?.Invoke();
 		}
 	}
 }
