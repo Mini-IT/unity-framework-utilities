@@ -24,10 +24,13 @@ namespace MiniIT.Unity
 
 		public override void Start()
 		{
-			if (!IsRunning)
+			if (IsRunning)
 			{
-				Restart();
+				return;
 			}
+
+			Reset();
+			base.Start();
 		}
 
 		protected override void OnLoopSystemUpdate()
