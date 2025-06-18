@@ -6,18 +6,25 @@ namespace MiniIT.Utils
 {
 	public class MainThreadRunner : IMainThreadRunner
 	{
-		private readonly TaskScheduler _mainThreadScheduler;
+		private readonly TaskScheduler _scheduler;
 
 		public MainThreadRunner()
 		{
-			_mainThreadScheduler = SynchronizationContext.Current != null ?
+			_scheduler = SynchronizationContext.Current != null ?
 				TaskScheduler.FromCurrentSynchronizationContext() :
 				TaskScheduler.Current;
 		}
 
 		public void RunInMainThread(Action action)
 		{
-			new Task(action).RunSynchronously(_mainThreadScheduler);
+			if (TaskScheduler.Current == _scheduler)
+			{
+				action();
+			}
+			else
+			{
+				Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, _scheduler);
+			}
 		}
 	}
 }
