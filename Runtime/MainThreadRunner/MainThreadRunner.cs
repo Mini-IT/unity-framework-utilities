@@ -23,7 +23,7 @@ namespace MiniIT.Utils
 			}
 			else
 			{
-				Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, _scheduler);
+				_ = Task.Factory.StartNew(action, CancellationToken.None, TaskCreationOptions.DenyChildAttach, _scheduler);
 			}
 		}
 	}
