@@ -63,7 +63,7 @@ namespace MiniIT.Utils
 					value = (T)result;
 					return true;
 				}
-				catch (InvalidCastException)
+				catch (Exception)
 				{
 					try
 					{
@@ -73,9 +73,6 @@ namespace MiniIT.Utils
 					catch (Exception)
 					{
 					}
-				}
-				catch (NullReferenceException) // field exists but `result` is null
-				{
 				}
 			}
 
