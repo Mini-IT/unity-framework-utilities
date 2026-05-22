@@ -2,8 +2,7 @@
     "name": "MiniIT.Framework.Utilities",
     "rootNamespace": "MiniIT",
     "references": [
-        "UniTask",
-        "MiniIT.Logging"
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -17,11 +16,6 @@
             "name": "com.cysharp.unitask",
             "expression": "2.3.0",
             "define": "UNITASK"
-        },
-        {
-            "name": "com.miniit.logger",
-            "expression": "1.1.0",
-            "define": "MINIIT_LOGGER"
         }
     ],
     "noEngineReferences": false
